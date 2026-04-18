@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Luqman | Senior Go Developer | Full Stack Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f8f9fb;
+  --bg3: #f1f3f7;
+  --border: #e5e7eb;
+  --border2: #d1d5db;
+  --text: #111827;
+  --text2: #6b7280;
+  --text3: #9ca3af;
+  --accent: #2563eb;
+  --accent-light: #eff6ff;
+  --accent2: #059669;
+  --accent2-light: #ecfdf5;
+  --code-bg: #0f1117;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent); color: #fff; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo { font-family: var(--mono); font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.875rem; color: var(--text2); font-weight: 500; transition: color 0.15s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { font-size: 0.85rem; font-weight: 600; background: var(--accent); color: #fff; padding: 0.5rem 1.1rem; border-radius: 8px; transition: background 0.15s; }
+.nav-cta:hover { background: #1d4ed8; }
+
+/* HERO */
+.hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-tag { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 0.72rem; color: var(--accent2); background: var(--accent2-light); border: 1px solid #a7f3d0; padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1.25rem; }
+.hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1rem; }
+h1 em { font-style: normal; color: var(--accent); }
+.hero-desc { font-size: 1rem; color: var(--text2); margin-bottom: 2rem; max-width: 480px; line-height: 1.75; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+.chip { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
+.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 7px; font-size: 0.875rem; font-weight: 600; padding: 0.7rem 1.4rem; border-radius: 8px; transition: all 0.15s; }
+.btn-blue { background: var(--accent); color: #fff; }
+.btn-blue:hover { background: #1d4ed8; }
+.btn-outline { border: 1.5px solid var(--border2); color: var(--text); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.hero-stats { display: flex; gap: 2rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.hstat-num { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.hstat-num span { color: var(--accent); }
+.hstat-lbl { font-size: 0.72rem; color: var(--text3); margin-top: 3px; font-family: var(--mono); }
+
+/* CODE */
+.code-card { background: var(--code-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
+.code-header { display: flex; align-items: center; gap: 8px; padding: 0.85rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); }
+.code-dot { width: 12px; height: 12px; border-radius: 50%; }
+.code-filename { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-left: auto; font-family: var(--mono); }
+pre { padding: 1.5rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.85; overflow-x: auto; color: #e2e8f0; }
+.kw{color:#c792ea}.ty{color:#82aaff}.st{color:#c3e88d}.cm{color:#546e7a;font-style:italic}.fn{color:#82aaff}.nu{color:#f78c6c}
+
+/* SECTIONS */
+.section { padding: 5rem 2rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 2.5rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.section-sub { color: var(--text2); font-size: 0.95rem; max-width: 500px; }
+
+/* STACK */
+#stack { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+.stack-group { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+.sg-title { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.85rem; }
+.sg-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.sg-item { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); padding: 3px 9px; border-radius: 5px; transition: all 0.15s; }
+.sg-item:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+/* PROJECTS */
+.projects-list { display: flex; flex-direction: column; gap: 1rem; }
+.project-card { display: grid; grid-template-columns: 48px 1fr auto; gap: 1.25rem; align-items: start; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); transition: all 0.2s; }
+.project-card:hover { border-color: var(--border2); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.project-rank { width: 48px; height: 48px; border-radius: 10px; background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: var(--text3); }
+.project-card:nth-child(1) .project-rank { background:#fefce8;border-color:#fde68a;color:#92400e; }
+.project-card:nth-child(2) .project-rank { background:#f1f5f9;border-color:#cbd5e1;color:#475569; }
+.project-card:nth-child(3) .project-rank { background:#fff7ed;border-color:#fed7aa;color:#9a3412; }
+.project-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.project-desc { font-size: 0.875rem; color: var(--text2); line-height: 1.65; margin-bottom: 0.75rem; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.ptag { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); background: var(--bg2); border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px; }
+.project-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; white-space: nowrap; }
+.pstat { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+.pstat span { color: var(--accent2); font-weight: 600; }
+
+/* EXPERIENCE */
+#experience { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.exp-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.exp-header { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+.exp-logo { width: 44px; height: 44px; border-radius: 10px; background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.75rem; font-weight: 700; color: var(--text2); flex-shrink: 0; }
+.exp-hinfo { flex: 1; min-width: 0; }
+.exp-role { font-size: 0.95rem; font-weight: 600; }
+.exp-company-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 2px; flex-wrap: wrap; }
+.exp-company { font-size: 0.825rem; color: var(--text2); }
+.exp-sep { color: var(--border2); }
+.exp-location { font-size: 0.8rem; color: var(--text3); }
+.exp-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.exp-period { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); white-space: nowrap; }
+.exp-current { font-size: 0.68rem; font-weight: 600; background: var(--accent2-light); color: var(--accent2); border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 100px; }
+.exp-body { padding: 1.25rem 1.5rem; }
+.exp-summary { font-size: 0.875rem; color: var(--text2); margin-bottom: 1rem; line-height: 1.7; }
+.impact-title { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
+.impacts { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.impact { display: flex; gap: 0.75rem; font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+.impact::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600; }
+.exp-skills { display: flex; flex-wrap: wrap; gap: 5px; }
+.eskill { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); background: var(--accent-light); border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 4px; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.avail-pill { display: inline-flex; align-items: center; gap: 7px; background: var(--accent2-light); border: 1px solid #a7f3d0; color: var(--accent2); font-family: var(--mono); font-size: 0.72rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.25rem; }
+.avail-pill::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent2); animation:blink 2s infinite; }
+.contact-left h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.contact-left p { color: var(--text2); font-size: 0.875rem; line-height: 1.75; margin-bottom: 1.5rem; }
+.contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-link { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; transition: all 0.15s; }
+.contact-link:hover { border-color: var(--accent); background: var(--accent-light); }
+.cl-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+.cl-lbl { font-size: 0.72rem; color: var(--text3); font-family: var(--mono); }
+.cl-val { font-size: 0.875rem; color: var(--text); font-weight: 500; }
+.contact-note { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+.contact-note h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; }
+.contact-note p { font-size: 0.875rem; color: var(--text2); line-height: 1.75; margin-bottom: 1.25rem; }
+
+/* FOOTER */
+footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--mono); font-size: 0.9rem; font-weight: 600; }
+footer p { font-size: 0.8rem; color: var(--text3); font-family: var(--mono); }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.25rem;}
+  .contact-grid{grid-template-columns:1fr;}
+  .project-card{grid-template-columns:48px 1fr;}
+  .project-meta{display:none;}
+  .section{padding:3.5rem 1.25rem;}
+}
+@media(max-width:640px){
+  nav{padding:0 1.25rem;}
+  .nav-links{display:none;}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><div class="nav-dot"></div>Muhammad Luqman</a>
+  <ul class="nav-links">
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:mluqman045@gmail.com" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-tag"><div class="hero-tag-dot"></div>Available for freelance work</div>
+    <h1>Muhammad<br>Luqman<br><em>Go Developer</em></h1>
+    <p class="hero-desc">Senior Software Engineer with 5+ years building production-grade backend systems — enterprise MDM platforms, VoIP telephony, distributed microservices, and high-concurrency APIs. Based in Islamabad, Pakistan.</p>
+    <div class="hero-chips">
+      <span class="chip">Go / Golang</span><span class="chip">Python</span><span class="chip">Node.js</span><span class="chip">React</span><span class="chip">Angular</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">FreeSWITCH</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-blue">View Projects →</a>
+      <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">5<span>+</span></div><div class="hstat-lbl">years experience</div></div>
+      <div><div class="hstat-num">5k<span>+</span></div><div class="hstat-lbl">devices managed</div></div>
+      <div><div class="hstat-num">120<span>ms</span></div><div class="hstat-lbl">avg API latency</div></div>
+    </div>
+  </div>
+
+  <div class="code-card">
+    <div class="code-header">
+      <div class="code-dot" style="background:#ff5f57"></div>
+      <div class="code-dot" style="background:#febc2e"></div>
+      <div class="code-dot" style="background:#28c840"></div>
+      <span class="code-filename">main.go</span>
+    </div>
+    <pre><span class="kw">package</span> main
+
+<span class="kw">type</span> <span class="ty">Developer</span> <span class="kw">struct</span> {
+    Name       <span class="ty">string</span>
+    Role       <span class="ty">string</span>
+    Location   <span class="ty">string</span>
+    Experience <span class="ty">int</span>
+    Skills     []<span class="ty">string</span>
+}
+
+<span class="kw">func</span> <span class="fn">main</span>() {
+    me := <span class="ty">Developer</span>{
+        Name:       <span class="st">"Muhammad Luqman"</span>,
+        Role:       <span class="st">"Senior Go Developer"</span>,
+        Location:   <span class="st">"Islamabad, Pakistan"</span>,
+        Experience: <span class="nu">5</span>,
+        Skills: []<span class="ty">string</span>{
+            <span class="st">"Go"</span>, <span class="st">"Python"</span>, <span class="st">"Node.js"</span>,
+            <span class="st">"React"</span>, <span class="st">"Angular"</span>,
+            <span class="st">"FreeSWITCH"</span>, <span class="st">"MDM"</span>,
+            <span class="st">"Docker"</span>, <span class="st">"Kubernetes"</span>,
+        },
+    }
+
+    <span class="cm">// Build amazing systems 🚀</span>
+    me.<span class="fn">Deploy</span>()
+}</pre>
+  </div>
+</div>
+
+<!-- STACK -->
+<section id="stack" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Tech Stack</div>
+      <h2>What I build with</h2>
+      <p class="section-sub">A full-spectrum toolkit from concurrent Go backends to responsive frontends and cloud infrastructure.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-group"><div class="sg-title">Backend languages</div><div class="sg-items"><span class="sg-item">Go / Golang</span><span class="sg-item">Python</span><span class="sg-item">Node.js</span><span class="sg-item">TypeScript</span><span class="sg-item">Lua</span></div></div>
+      <div class="stack-group"><div class="sg-title">Frontend</div><div class="sg-items"><span class="sg-item">React</span><span class="sg-item">Angular</span><span class="sg-item">HTML5 / CSS3</span><span class="sg-item">Angular Material</span></div></div>
+      <div class="stack-group"><div class="sg-title">APIs & architecture</div><div class="sg-items"><span class="sg-item">REST APIs</span><span class="sg-item">gRPC / Protobuf</span><span class="sg-item">Microservices</span><span class="sg-item">Hexagonal Arch.</span><span class="sg-item">RabbitMQ</span></div></div>
+      <div class="stack-group"><div class="sg-title">VoIP & telephony</div><div class="sg-items"><span class="sg-item">FreeSWITCH</span><span class="sg-item">ESL</span><span class="sg-item">IVR / DID</span><span class="sg-item">XML cURL</span><span class="sg-item">Dialplan</span></div></div>
+      <div class="stack-group"><div class="sg-title">Cloud & DevOps</div><div class="sg-items"><span class="sg-item">Docker</span><span class="sg-item">Kubernetes</span><span class="sg-item">AWS</span><span class="sg-item">GCP</span><span class="sg-item">CI/CD</span></div></div>
+      <div class="stack-group"><div class="sg-title">Databases & messaging</div><div class="sg-items"><span class="sg-item">PostgreSQL</span><span class="sg-item">MongoDB</span><span class="sg-item">Redis</span><span class="sg-item">Cassandra</span><span class="sg-item">Kafka</span><span class="sg-item">Elasticsearch</span></div></div>
+      <div class="stack-group"><div class="sg-title">Security & auth</div><div class="sg-items"><span class="sg-item">OAuth 2.0</span><span class="sg-item">OpenID Connect</span><span class="sg-item">Keycloak</span><span class="sg-item">JWT</span><span class="sg-item">LDAP / AD</span><span class="sg-item">WireGuard</span></div></div>
+      <div class="stack-group"><div class="sg-title">Go frameworks</div><div class="sg-items"><span class="sg-item">Gin</span><span class="sg-item">Fiber</span><span class="sg-item">Chi</span><span class="sg-item">Gorilla Mux</span><span class="sg-item">Goroutines</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Projects</div>
+      <h2>Top Projects</h2>
+      <p class="section-sub">Curated selection of my best work, ranked by impact. Most are private enterprise systems described at architecture level.</p>
+    </div>
+    <div class="projects-list">
+
+      <div class="project-card">
+        <div class="project-rank">1</div>
+        <div>
+          <div class="project-title">Windows MDM Platform — Pligence</div>
+          <p class="project-desc">Enterprise-grade Mobile Device Management server in Go, deployed across 5,000+ Windows devices. Real-time policy enforcement, remote command execution, device telemetry, WireGuard VPN tunnels, LDAP/Active Directory sync, and SSO via Keycloak (OpenID Connect / OAuth 2.0). Sub-120ms API response time maintained across all device operations with microservice architecture.</p>
+          <div class="project-tags"><span class="ptag">Go</span><span class="ptag">MDM</span><span class="ptag">WireGuard</span><span class="ptag">LDAP / AD</span><span class="ptag">Keycloak</span><span class="ptag">Docker</span><span class="ptag">Kubernetes</span><span class="ptag">REST API</span></div>
+        </div>
+        <div class="project-meta">
+          <div class="pstat"><span>5,000+</span> devices</div>
+          <div class="pstat"><span>&lt;120ms</span> latency</div>
+          <div class="pstat"><span>SSO</span> auth</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-rank">2</div>
+        <div>
+          <div class="project-title">FreeSWITCH VoIP Dialer Platform</div>
+          <p class="project-desc">Full-featured enterprise telephony backend in Go — ESL integration for real-time call control, intelligent load balancer across multiple FreeSWITCH nodes, Redis-based live call state tracking, dynamic XML dialplan engine (zero restarts for config changes), and Kafka event streaming via Lua for downstream analytics. REST APIs for IVR, DID routing, ring groups and extensions backed by Cassandra.</p>
+          <div class="project-tags"><span class="ptag">Go</span><span class="ptag">FreeSWITCH</span><span class="ptag">ESL</span><span class="ptag">Kafka</span><span class="ptag">Redis</span><span class="ptag">Cassandra</span><span class="ptag">IVR</span><span class="ptag">DID</span></div>
+        </div>
+        <div class="project-meta">
+          <div class="pstat"><span>Multi</span>-node</div>
+          <div class="pstat"><span>Kafka</span> stream</div>
+          <div class="pstat"><span>0</span> restarts</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-rank">3</div>
+        <div>
+          <div class="project-title">Distributed Microservices Backend</div>
+          <p class="project-desc">Designed and built a distributed microservices system with Auth, Logging, Listener, Broker, and Mail services communicating via REST, RPC, and AMQP (RabbitMQ). Each service has its own PostgreSQL database for true independence. Clean hexagonal architecture ensures testability and independent deployability across the system.</p>
+          <div class="project-tags"><span class="ptag">Go</span><span class="ptag">RabbitMQ</span><span class="ptag">PostgreSQL</span><span class="ptag">Docker</span><span class="ptag">RPC</span><span class="ptag">Hexagonal Arch.</span></div>
+        </div>
+        <div class="project-meta">
+          <div class="pstat"><span>5</span> services</div>
+          <div class="pstat"><span>AMQP</span> messaging</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-rank">4</div>
+        <div>
+          <div class="project-title">Solana Blockchain Sniping Engine — AlphaSquad</div>
+          <p class="project-desc">High-performance Go backend to detect and acquire newly launched Solana tokens faster than competing platforms. Optimized concurrent detection with sub-second execution and Phantom wallet integration for seamless SOL transactions.</p>
+          <div class="project-tags"><span class="ptag">Go</span><span class="ptag">Solana</span><span class="ptag">Blockchain</span><span class="ptag">Phantom Wallet</span><span class="ptag">Goroutines</span></div>
+        </div>
+        <div class="project-meta">
+          <div class="pstat"><span>&lt;1s</span> execution</div>
+          <div class="pstat"><span>SOL</span> txns</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-rank">5</div>
+        <div>
+          <div class="project-title">Crypto Price Alert Telegram Bot</div>
+          <p class="project-desc">Go-based Telegram bot delivering real-time cryptocurrency price alerts with configurable per-user subscriptions and custom thresholds. Lightweight goroutine-based concurrency for multiple simultaneous users with live market data polling.</p>
+          <div class="project-tags"><span class="ptag">Go</span><span class="ptag">Telegram API</span><span class="ptag">Goroutines</span><span class="ptag">Crypto</span></div>
+        </div>
+        <div class="project-meta">
+          <div class="pstat"><span>Real</span>-time</div>
+          <div class="pstat"><span>Multi</span>-user</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Professional Experience</div>
+      <h2>Where I've worked</h2>
+      <p class="section-sub">5+ years across enterprise MDM, VoIP infrastructure, blockchain backends, and distributed systems.</p>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-logo">Pl</div>
+          <div class="exp-hinfo">
+            <div class="exp-role">Software Engineer — Golang Developer</div>
+            <div class="exp-company-row"><span class="exp-company">Pligence Inc.</span><span class="exp-sep">·</span><span class="exp-location">Lahore, Pakistan</span></div>
+          </div>
+          <div class="exp-right"><div class="exp-current">Present</div><div class="exp-period">Sep 2024 — Present</div></div>
+        </div>
+        <div class="exp-body">
+          <p class="exp-summary">Architecting a Windows-first MDM server in Go deployed across 5,000+ enterprise devices with endpoint security, compliance, and real-time policy enforcement at scale.</p>
+          <div class="impact-title">Core Impact</div>
+          <div class="impacts">
+            <div class="impact">Built Windows MDM server managing 5,000+ enterprise devices with real-time policy enforcement, remote commands, and telemetry — maintaining sub-120ms API response time across all operations.</div>
+            <div class="impact">Integrated Microsoft Active Directory via a custom LDAP Go connector, synchronizing users, groups, and security policies seamlessly across all endpoints.</div>
+            <div class="impact">Implemented SSO using Keycloak (OpenID Connect / OAuth 2.0) and developed a WireGuard VPN microservice for secure encrypted remote communication.</div>
+            <div class="impact">Designed microservice architecture with Docker and Kubernetes ensuring high availability, scalable deployments, and rapid feature iteration.</div>
+          </div>
+          <div class="exp-skills"><span class="eskill">Go</span><span class="eskill">MDM</span><span class="eskill">LDAP</span><span class="eskill">Keycloak</span><span class="eskill">WireGuard</span><span class="eskill">Docker</span><span class="eskill">Kubernetes</span><span class="eskill">REST API</span></div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-logo">AS</div>
+          <div class="exp-hinfo">
+            <div class="exp-role">Software Engineer — Golang Specialist</div>
+            <div class="exp-company-row"><span class="exp-company">AlphaSquad</span><span class="exp-sep">·</span><span class="exp-location">Islamabad · Contract</span></div>
+          </div>
+          <div class="exp-right"><div class="exp-period">May 2024 — Aug 2024</div></div>
+        </div>
+        <div class="exp-body">
+          <p class="exp-summary">Led backend of a multi-role e-commerce platform and a high-performance Solana blockchain sniping application.</p>
+          <div class="impact-title">Core Impact</div>
+          <div class="impacts">
+            <div class="impact">Spearheaded backend of a multi-role e-commerce platform (User, Curator, Admin) with Convictional API integration for product listings and order management.</div>
+            <div class="impact">Built Solana token sniping backend with optimized concurrency to detect newly launched tokens faster than competitors, with sub-second execution.</div>
+            <div class="impact">Integrated Phantom wallet for SOL transactions, implemented 2FA, in-app notifications, and email services via Klaviyo and AWS SES.</div>
+          </div>
+          <div class="exp-skills"><span class="eskill">Go</span><span class="eskill">Solana</span><span class="eskill">Blockchain</span><span class="eskill">AWS SES</span><span class="eskill">2FA</span></div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-logo">CT</div>
+          <div class="exp-hinfo">
+            <div class="exp-role">VoIP & Backend Developer</div>
+            <div class="exp-company-row"><span class="exp-company">Contract Engagement</span><span class="exp-sep">·</span><span class="exp-location">Islamabad · Remote</span></div>
+          </div>
+          <div class="exp-right"><div class="exp-period">2023 — 2024</div></div>
+        </div>
+        <div class="exp-body">
+          <p class="exp-summary">Designed and built a full FreeSWITCH-based enterprise dialer platform in Go, handling inbound/outbound calls, IVR, DID routing, and load-balanced telephony at scale.</p>
+          <div class="impact-title">Core Impact</div>
+          <div class="impacts">
+            <div class="impact">Built intelligent load balancer distributing calls across multiple FreeSWITCH nodes based on live stats, ensuring high availability and optimal resource utilization.</div>
+            <div class="impact">Developed xml_curl endpoint serving dynamic XML dialplans to FreeSWITCH, replacing static configs and enabling runtime updates with zero service restarts.</div>
+            <div class="impact">Integrated Kafka event streaming via Lua scripts for real-time FreeSWITCH event publishing to downstream analytics pipelines.</div>
+            <div class="impact">Built REST APIs for IVR, DID routing, extensions and ring groups persisted in Cassandra for high-throughput write performance.</div>
+          </div>
+          <div class="exp-skills"><span class="eskill">Go</span><span class="eskill">FreeSWITCH</span><span class="eskill">ESL</span><span class="eskill">Kafka</span><span class="eskill">Redis</span><span class="eskill">Cassandra</span><span class="eskill">Lua</span></div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-logo">GM</div>
+          <div class="exp-hinfo">
+            <div class="exp-role">Software Engineer — Full Stack (Backend Lead)</div>
+            <div class="exp-company-row"><span class="exp-company">GoMarkho</span><span class="exp-sep">·</span><span class="exp-location">Islamabad</span></div>
+          </div>
+          <div class="exp-right"><div class="exp-period">Dec 2020 — Mar 2024</div></div>
+        </div>
+        <div class="exp-body">
+          <p class="exp-summary">Led backend development for VoIP apps, microservices, and the Convate mobile app backend, while also delivering Angular frontends.</p>
+          <div class="impact-title">Core Impact</div>
+          <div class="impacts">
+            <div class="impact">Built microservices and web services (SOAP, REST, XML) with loosely coupled, independently deployable architecture.</div>
+            <div class="impact">Used Go concurrency to handle high data volumes, integrated Redis caching, AWS S3 storage, and Stripe payment gateway.</div>
+            <div class="impact">Delivered fully responsive Angular frontends and a custom call-flow automation tool using a charts library, reducing manual config time significantly.</div>
+            <div class="impact">Delivered comprehensive Swagger API documentation streamlining third-party integration and developer onboarding.</div>
+          </div>
+          <div class="exp-skills"><span class="eskill">Go</span><span class="eskill">Angular</span><span class="eskill">Redis</span><span class="eskill">AWS S3</span><span class="eskill">Stripe</span><span class="eskill">Microservices</span><span class="eskill">Swagger</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Contact</div>
+      <h2>Let's work together</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="avail-pill">Available for new projects</div>
+        <h3>Open to freelance,<br>contract & remote roles</h3>
+        <p>Most of my work is in private enterprise systems. Rather than code links, I offer architecture walkthroughs and technical discussions on request. Happy to jump on a call and walk through relevant work in depth.</p>
+        <div class="contact-links">
+          <a href="mailto:mluqman045@gmail.com" class="contact-link"><div class="cl-icon">✉️</div><div><div class="cl-lbl">email</div><div class="cl-val">mluqman045@gmail.com</div></div></a>
+          <a href="https://linkedin.com/in/muhammad-luqman-365333164" target="_blank" class="contact-link"><div class="cl-icon">💼</div><div><div class="cl-lbl">linkedin</div><div class="cl-val">muhammad-luqman-365333164</div></div></a>
+          <a href="https://github.com/malikmaani" target="_blank" class="contact-link"><div class="cl-icon">⌨️</div><div><div class="cl-lbl">github</div><div class="cl-val">github.com/malikmaani</div></div></a>
+          <div class="contact-link" style="cursor:default"><div class="cl-icon">📍</div><div><div class="cl-lbl">location</div><div class="cl-val">Islamabad, Pakistan · Remote only</div></div></div>
+        </div>
+      </div>
+      <div class="contact-note">
+        <h4>Send me a message</h4>
+        <p>Best way to reach me is via email. I typically respond within 24 hours. For Upwork clients, feel free to send a direct message on the platform.</p>
+        <a href="mailto:mluqman045@gmail.com" class="btn btn-blue" style="display:inline-flex;margin-bottom:1.5rem">Send an email →</a>
+        <hr style="border:none;border-top:1px solid var(--border);margin-bottom:1.25rem">
+        <p style="font-size:0.8rem;color:var(--text3);font-family:var(--mono)">Islamabad, Pakistan · UTC+5 · English & Urdu</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Muhammad Luqman</div>
+  <p>Go · Python · Node.js · React · Angular · VoIP · MDM</p>
+  <p>© 2025 Muhammad Luqman. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
